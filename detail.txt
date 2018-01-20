@@ -1,0 +1,12 @@
+
+
+        Bundle extras = getIntent().getExtras();
+        String wikiPath = "";
+
+        if (extras != null) {
+            wikiPath = extras.getString("wiki");
+        }
+
+        WebView wv = (WebView) findViewById(R.id.wvWiki);
+        wv.setWebViewClient(new WebViewClient());
+        wv.loadUrl(wikiPath);

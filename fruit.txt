@@ -1,0 +1,18 @@
+public class Fruit {
+
+    public String name;
+    public String variety;
+    public String wiki;
+    public int resource;
+
+    public Fruit() {
+
+    }
+
+    public Fruit(String n, String v, String w, int r) {
+        name = n;
+        variety = v;
+        wiki = w;
+        resource = r;
+    }
+}

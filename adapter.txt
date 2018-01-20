@@ -1,0 +1,54 @@
+
+    public void fillArray() {
+        fruits.add( new Fruit("Apple", "granny smith, golden delicious", "https://en.wikipedia.org/wiki/Apple", R.drawable.apple) );
+        fruits.add( new Fruit("Lemon", "meyer, libson", "https://en.wikipedia.org/wiki/Lemon", R.drawable.lemon) );
+        fruits.add( new Fruit("Melon", "honeydew, canteloupe", "https://en.wikipedia.org/wiki/Melon", R.drawable.melon) );
+        fruits.add( new Fruit("Peach", "clingstone, nectarine", "https://en.wikipedia.org/wiki/Peach", R.drawable.peach) );
+        fruits.add( new Fruit("Pear", "anjou, bartlett", "https://en.wikipedia.org/wiki/Pear", R.drawable.pear) );
+    }
+
+    private class FruitAdapter extends BaseAdapter {
+
+        public int getCount() {
+            return fruits.size();
+        }
+
+        public Object getItem(int pos) {
+            return fruits.get(pos);
+        }
+
+        public long getItemId(int arg0) {
+            return 0;
+        }
+
+        public View getView(int pos, View v, ViewGroup vg) {
+
+            final Fruit fruit = fruits.get(pos);
+
+            if (v == null) {
+                v = LayoutInflater.from(getApplication()).inflate(R.layout.list_item, null);
+                v.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            }
+
+            v.findViewById(R.id.ivInfo).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplication(), DetailActivity.class);
+                    intent.putExtra("wiki", fruit.wiki);
+
+                    MainActivity.this.startActivity(intent);
+                }
+            });
+
+            TextView tvAccount = (TextView) v.findViewById(R.id.tvName);
+            TextView tvReader = (TextView) v.findViewById(R.id.tvVariety);
+
+            tvAccount.setText(fruit.name);
+            tvReader.setText(fruit.variety);
+
+            ImageView ivFruit = (ImageView) v.findViewById(R.id.ivFruit);
+            ivFruit.setImageDrawable(getDrawable(fruit.resource));
+
+            return v;
+        }
+    }
